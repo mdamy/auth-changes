@@ -1,13 +1,15 @@
+// Powers form in web/routes/forgot-password.jsx
 import { applyParams, save, ActionOptions, SendResetPasswordUserActionContext, DefaultEmailTemplates, Config } from "gadget-server";
 
 /**
  * @param { SendResetPasswordUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
+  // Applies a new "resetPasswordToken" param to user record found by "email", and saves to database
   applyParams(params, record);
   await save(record);
   return {
-    result: "ok"
+    result: "ok" // Overrides default user record return with "ok" string
   }
 };
 
@@ -15,10 +17,11 @@ export async function run({ params, record, logger, api, session }) {
  * @param { SendResetPasswordUserActionContext } context
  */
 export async function onSuccess({ params, record, logger, api, emails }) {
-  if (record.resetPasswordToken && params.user?.resetPasswordCode) {
+  if (record.resetPasswordToken) {
+    // Generates link to reset password
     const url = new URL("/reset-password", Config.appUrl);
-    url.searchParams.append("code", params.user?.resetPasswordCode);
-    // sends a reset password email with a link generated internally by Gadget
+    url.searchParams.append("code", record.resetPasswordToken);
+    // Sends link to user
     await emails.sendMail({
       to: record.email,
       subject: `Reset password request from ${Config.appName}`,
@@ -29,7 +32,7 @@ export async function onSuccess({ params, record, logger, api, emails }) {
 
 /** @type { ActionOptions } */
 export const options = {
-  actionType: "custom",
+  actionType: "custom", 
   returnType: true,
   triggers: {
     sendResetPassword: true

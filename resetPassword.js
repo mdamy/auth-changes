@@ -1,13 +1,15 @@
+// Powers form in web/routes/reset-password.jsx
 import { applyParams, save, ActionOptions, ResetPasswordUserActionContext } from "gadget-server";
 
 /**
  * @param { ResetPasswordUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
+  // Applies new password to user record and saves to database
   applyParams(params, record);
   await save(record);
   return {
-    result: "ok"
+    result: "ok" // Overrides default user record return with "ok" string
   }
 };
 

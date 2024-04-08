@@ -1,13 +1,13 @@
+// Powers form in web/routes/sign-in.jsx
 import { save, ActionOptions, SignInUserActionContext, applyParams } from "gadget-server";
 
 /**
  * @param { SignInUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
-  applyParams(params, record);
   record.lastSignedIn = new Date();
   await save(record);
-  // associate the current user record with the active session
+  // associates the current user record with the active session
   session?.set("user", { _link: record.id });
 };
 
@@ -20,7 +20,7 @@ export async function onSuccess({ params, record, logger, api }) {
 
 /** @type { ActionOptions } */
 export const options = {
-  actionType: "update",
+  actionType: "custom",
   triggers: {
     googleOAuthSignIn: true,
     emailSignIn: true

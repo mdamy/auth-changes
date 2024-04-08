@@ -1,13 +1,14 @@
+// Powers the sign up flow, this action is called from the confirmation email
 import { applyParams, save, ActionOptions, VerifyEmailUserActionContext } from "gadget-server";
 
 /**
  * @param { VerifyEmailUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
-  applyParams(params, record);
-  await save(record);
+  applyParams(params, record);// <-- need to add how we do the checks
+  await save(record); 
   return {
-    result: "ok"
+    result: "ok"  // Overrides default user record return with "ok" string
   }
 };
 

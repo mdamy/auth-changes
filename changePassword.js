@@ -1,10 +1,11 @@
+// Powers form in web/routes/changePassword.jsx
 import { applyParams, save, ActionOptions, ChangePasswordUserActionContext } from "gadget-server";
 
 /**
  * @param { ChangePasswordUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
-  applyParams(params, record);
+  applyParams(params, record); // <-- need to add how we do the checks
   await save(record);
 };
 
@@ -17,7 +18,7 @@ export async function onSuccess({ params, record, logger, api, emails }) {
 
 /** @type { ActionOptions } */
 export const options = {
-  actionType: "update",
+  actionType: "custom",
   triggers: {
     changePassword: true
   }
