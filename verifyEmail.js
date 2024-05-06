@@ -1,14 +1,14 @@
-// Powers the sign up flow, this action is called from the confirmation email
+// Powers the sign up flow, this action is called from the email generated in /actions/sendVerifyEmail.js
 import { applyParams, save, ActionOptions, VerifyEmailUserActionContext } from "gadget-server";
 
 /**
  * @param { VerifyEmailUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
-  applyParams(params, record);// <-- need to add how we do the checks
+  applyParams(params, record);
   await save(record); 
   return {
-    result: "ok"  // Overrides default user record return with "ok" string
+    result: "ok"  
   }
 };
 
