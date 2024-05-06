@@ -4,7 +4,7 @@ import { ActionOptions, SignOutUserActionContext } from "gadget-server";
  * @param { SignOutUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
-  // unsets the associated user on the active session
+  // unsets the signed in user with the active session
   session?.set("user", null);
 };
 
