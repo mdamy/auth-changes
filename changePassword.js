@@ -5,7 +5,8 @@ import { applyParams, save, ActionOptions, ChangePasswordUserActionContext } fro
  * @param { ChangePasswordUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
-  applyParams(params, record); // <-- need to add how we do the checks
+  // Applies new 'password' to user record and saves to db
+  applyParams(params, record);
   await save(record);
 };
 
