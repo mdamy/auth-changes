@@ -8,12 +8,12 @@ export async function run({ params, record, logger, api, session }) {
   applyParams(params, record);
   record.lastSignedIn = new Date();
   await save(record);
-  // associates the current user record with the active session <-- why is this here
+  // Sets the signed in user with to active session
   if (record.emailVerified) {
     session?.set("user", { _link: record.id });
   }
   return {
-    result: "ok" //// Overrides default user record return with "ok" string
+    result: "ok" 
   }
 };
 
