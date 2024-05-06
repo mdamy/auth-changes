@@ -5,6 +5,7 @@ import { applyParams, save, ActionOptions, VerifyEmailUserActionContext } from "
  * @param { VerifyEmailUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
+  // Applies new 'emailVerified' status to user record and saves to db
   applyParams(params, record);
   await save(record); 
   return {
