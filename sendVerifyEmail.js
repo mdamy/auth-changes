@@ -1,15 +1,15 @@
-// Powers the sign up flow, this action is called from: api/models/user/actions/signUp.js
+// Powers the sign up flow, this action is called from /user/actions/signUp.js
 import { applyParams, save, ActionOptions, SendVerifyEmailUserActionContext, DefaultEmailTemplates, Config } from "gadget-server";
 
 /**
  * @param { SendVerifyEmailUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
-// Applies a new "emailVerificationToken" param to user record found by "email", and saves to database
+// Applies hashed code 'emailVerificationToken' to user record and saves to db  
   applyParams(params, record);
   await save(record);
   return {
-    result: "ok"  // Overrides default user record return with "ok" string
+    result: "ok" 
   }
 };
 
