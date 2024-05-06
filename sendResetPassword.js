@@ -5,11 +5,11 @@ import { applyParams, save, ActionOptions, SendResetPasswordUserActionContext, D
  * @param { SendResetPasswordUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
-  // Applies a new "resetPasswordToken" param to user record found by "email", and saves to database
+// Applies hashed code 'resetPasswordToken' to user record and saves to db  
   applyParams(params, record);
   await save(record);
   return {
-    result: "ok" // Overrides default user record return with "ok" string
+    result: "ok"
   }
 };
 
