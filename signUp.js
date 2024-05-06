@@ -8,8 +8,8 @@ export async function run({ params, record, logger, api, session }) {
   applyParams(params, record);
   record.lastSignedIn = new Date();
   await save(record);
-  // Sets the signed in user with to active session
   if (record.emailVerified) {
+    // Sets the signed in user with to active session
     session?.set("user", { _link: record.id });
   }
   return {
@@ -21,8 +21,8 @@ export async function run({ params, record, logger, api, session }) {
  * @param { SignUpUserActionContext } context
  */
 export async function onSuccess({ params, record, logger, api }) {
-  // sends the user a verification email by: api/models/user/actions/sendVerifyEmail.js
   if (!record.emailVerified) {
+    // Sends verification email by bal calling /actions/sendVerifyEmail.js
     await api.user.sendVerifyEmail({ email: record.email });
   }
 };
