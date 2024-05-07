@@ -1,4 +1,4 @@
-// Powers form in web/routes/changePassword.jsx
+// Powers form in web/routes/change-password.jsx
 import { applyParams, save, ActionOptions, ChangePasswordUserActionContext } from "gadget-server";
 
 /**
