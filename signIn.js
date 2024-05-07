@@ -7,7 +7,7 @@ import { save, ActionOptions, SignInUserActionContext, applyParams } from "gadge
 export async function run({ params, record, logger, api, session }) {
   record.lastSignedIn = new Date();
   await save(record);
-  // Sets the signed-in user to the active session
+  // Assigns the signed-in user to the active session
   session?.set("user", { _link: record.id });
 };
 
