@@ -1,4 +1,4 @@
-// Powers the sign up flow, this action is called from /user/actions/signUp.js
+// Powers the sign up flow, this action is called from api/models/user/actions/signUp.js
 import { applyParams, save, ActionOptions, SendVerifyEmailUserActionContext, DefaultEmailTemplates, Config } from "gadget-server";
 
 /**
