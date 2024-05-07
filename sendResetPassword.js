@@ -5,7 +5,7 @@ import { applyParams, save, ActionOptions, SendResetPasswordUserActionContext, D
  * @param { SendResetPasswordUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
-// Applies new hashed code 'resetPasswordToken', to user record and saves to database
+// Applies new hashed code 'resetPasswordToken' to user record and saves to database
   applyParams(params, record);
   await save(record);
   return {
