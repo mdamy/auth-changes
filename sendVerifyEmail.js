@@ -5,7 +5,7 @@ import { applyParams, save, ActionOptions, SendVerifyEmailUserActionContext, Def
  * @param { SendVerifyEmailUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
-  // Applies new hashed code 'emailVerificationToken' to user record and saves to database
+  // Applies new hashed code 'emailVerificationToken' to the user record and saves to database
   applyParams(params, record);
   await save(record);
   return {
