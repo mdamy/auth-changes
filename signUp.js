@@ -5,7 +5,7 @@ import { applyParams, save, ActionOptions, SignUpUserActionContext } from "gadge
  * @param { SignUpUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
-  // Applies 'email' and 'password' to a new user record and saves to db  
+ // Applies new 'email' and 'password' to the user record and saves to database
   applyParams(params, record);
   record.lastSignedIn = new Date();
   await save(record);
