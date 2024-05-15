@@ -1,18 +1,20 @@
+// Powers the form in web/routes/sign-up.jsx
 import { applyParams, save, ActionOptions, SignUpUserActionContext } from "gadget-server";
 
 /**
  * @param { SignUpUserActionContext } context
  */
 export async function run({ params, record, logger, api, session }) {
+ // Applies new 'email' and 'password' to the user record and saves to database
   applyParams(params, record);
   record.lastSignedIn = new Date();
   await save(record);
-  // associate the current user record with the active session
   if (record.emailVerified) {
+    // Assigns the signed-in user to the active session
     session?.set("user", { _link: record.id });
   }
   return {
-    result: "ok"
+    result: "ok" 
   }
 };
 
@@ -20,8 +22,8 @@ export async function run({ params, record, logger, api, session }) {
  * @param { SignUpUserActionContext } context
  */
 export async function onSuccess({ params, record, logger, api }) {
-  // sends the user a verification email if they have not yet verified
   if (!record.emailVerified) {
+    // Sends verification email by calling api/models/users/actions/sendVerifyEmail.js
     await api.user.sendVerifyEmail({ email: record.email });
   }
 };
